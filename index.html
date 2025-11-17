@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Node.js Technical Interview Form</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+<style>
+    body { background: #121212; font-family: "Roboto", sans-serif; color: #e0e0e0; padding: 20px; }
+    h1 { color: #ffffff; }
+    .question-block { background: #1e1e1e; padding: 18px; margin-bottom: 24px; border-radius: 14px; border: 1px solid #2a2a2a; }
+    .title-row { display: flex; justify-content: space-between; margin-bottom: 12px; align-items: center; }
+    .question-title { font-size: 18px; font-weight: 500; }
+    pre { border-radius: 12px; padding: 12px; position: relative; }
+    .copy-btn { position: absolute; top: 10px; right: 10px; background: #03dac6; color: #000; border: none; padding: 6px 10px; border-radius: 8px; cursor: pointer; font-weight: 500; }
+    .copy-btn:hover { background: #00c9b4; }
+    .final-btn { width: 100%; margin-top: 30px; background: #bb86fc; color: #000; border: none; padding: 16px; font-size: 20px; border-radius: 14px; cursor: pointer; font-weight: 600; }
+    .final-btn:hover { background: #a26af7; }
+</style>
+</head>
+<body>
+<h1>Node.js Technical Interview</h1>
+<div class="question-block">
+    <div class="title-row">
+        <div class="question-title">1. Explain the Node.js Event Loop</div>
+        <label><input type="checkbox" class="answer"> answered</label>
+    </div>
+</div>
+<div class="question-block">
+    <div class="title-row">
+        <div class="question-title">2. What is the difference between setImmediate() and process.nextTick()?</div>
+        <label><input type="checkbox" class="answer"> answered</label>
+    </div>
+</div>
+<div class="question-block">
+    <div class="title-row">
+        <div class="question-title">Task A: What will this code output?</div>
+        <label><input type="checkbox" class="answer"> answered</label>
+    </div>
+    <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><code class="language-javascript">
+console.log("Start");
+setTimeout(() => { console.log("Timeout"); }, 0);
+Promise.resolve().then(() => { console.log("Promise"); });
+console.log("End");
+    </code></pre>
+</div>
+<div class="question-block">
+    <div class="title-row">
+        <div class="question-title">Task B: Fix the memory leak in this code</div>
+        <label><input type="checkbox" class="answer"> answered</label>
+    </div>
+    <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><code class="language-javascript">
+let cache = {};
+function loadUser(id) {
+    if (!cache[id]) {
+        cache[id] = new Array(1000000).join("memory leak");
+    }
+    return cache[id];
+}
+setInterval(() => loadUser("john"), 1000);
+    </code></pre>
+</div>
+<button class="final-btn" onclick="generateReport()">Generate Interview Summary</button>
+<script>
+function copyCode(btn) {
+    const code = btn.parentElement.innerText.replace("Copy", "");
+    navigator.clipboard.writeText(code);
+    btn.innerText = "Copied!";
+    setTimeout(() => btn.innerText = "Copy", 1500);
+}
+function generateReport() {
+    const answers = document.querySelectorAll(".question-block");
+    let report = "Interview Summary:\n\n";
+    answers.forEach((block, i) => {
+        const title = block.querySelector(".question-title").innerText.trim();
+        const checked = block.querySelector(".answer").checked;
+        report += `${title} — ${checked ? "ANSWERED" : "NOT ANSWERED"}\n`;
+    });
+    prompt("Copy the interview summary:", report);
+}
+</script>
+</body>
+</html>
