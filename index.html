@@ -1,57 +1,273 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<title>Node.js Technical Interview Form</title>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-<script>hljs.highlightAll();</script>
-<style>
-    body { background: #121212; font-family: "Roboto", sans-serif; color: #e0e0e0; padding: 20px; }
-    h1 { color: #ffffff; }
-    .question-block { background: #1e1e1e; padding: 18px; margin-bottom: 24px; border-radius: 14px; border: 1px solid #2a2a2a; }
-    .title-row { display: flex; justify-content: space-between; margin-bottom: 12px; align-items: center; }
-    .question-title { font-size: 18px; font-weight: 500; }
-    pre { border-radius: 12px; padding: 12px; position: relative; }
-    .copy-btn { position: absolute; top: 10px; right: 10px; background: #03dac6; color: #000; border: none; padding: 6px 10px; border-radius: 8px; cursor: pointer; font-weight: 500; }
-    .copy-btn:hover { background: #00c9b4; }
-    .final-btn { width: 100%; margin-top: 30px; background: #bb86fc; color: #000; border: none; padding: 16px; font-size: 20px; border-radius: 14px; cursor: pointer; font-weight: 600; }
-    .final-btn:hover { background: #a26af7; }
-</style>
+    <meta charset="UTF-8">
+    <title>Node.js Technical Interview Form</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <style>
+        body {
+            background: #121212;
+            font-family: "Roboto", sans-serif;
+            color: #e0e0e0;
+            padding: 20px;
+        }
+
+        .wrapper {
+            max-width: 800px;
+            margin: auto;
+        }
+
+        h1 {
+            color: #ffffff;
+        }
+
+        .question-block {
+            background: #1e1e1e;
+            padding: 18px;
+            margin-bottom: 24px;
+            border-radius: 14px;
+            border: 1px solid #2a2a2a;
+        }
+
+        .question-block>div {
+            max-width: 95%;
+        }
+
+        .question-block label {
+            white-space: nowrap;
+        }
+
+        .title-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            align-items: center;
+        }
+
+        .question-description {
+            margin-top: 8px;
+            font-size: 14px;
+            color: #b0b0b0;
+
+        }
+
+        .question-title {
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        pre {
+            border-radius: 12px;
+            padding: 12px;
+            position: relative;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #03dac6;
+            color: #000;
+            border: none;
+            padding: 6px 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .copy-btn:hover {
+            background: #00c9b4;
+        }
+
+        .final-btn {
+            width: 100%;
+            margin-top: 30px;
+            background: #bb86fc;
+            color: #000;
+            border: none;
+            padding: 16px;
+            font-size: 20px;
+            border-radius: 14px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .final-btn:hover {
+            background: #a26af7;
+        }
+    </style>
 </head>
+
 <body>
-<h1>Node.js Technical Interview</h1>
-<div class="question-block">
-    <div class="title-row">
-        <div class="question-title">1. Explain the Node.js Event Loop</div>
-        <label><input type="checkbox" class="answer"> answered</label>
-    </div>
-</div>
-<div class="question-block">
-    <div class="title-row">
-        <div class="question-title">2. What is the difference between setImmediate() and process.nextTick()?</div>
-        <label><input type="checkbox" class="answer"> answered</label>
-    </div>
-</div>
-<div class="question-block">
-    <div class="title-row">
-        <div class="question-title">Task A: What will this code output?</div>
-        <label><input type="checkbox" class="answer"> answered</label>
-    </div>
-    <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><code class="language-javascript">
+    <div class="wrapper">
+        <h1>Node.js Technical Interview</h1>
+        <h2>Block 1: Basic JS questions</h2>
+        <div class="question-block">
+            <div class="title-row">
+                <div class="question-title">JS Task 1: What will this code output? [Scope]</div>
+                <label><input type="checkbox" class="answer"> answered</label>
+            </div>
+            <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><code class="language-javascript">
+let a = 10;
+if(true) {
+  let a = 9;
+  console.log(a)
+}
+
+console.log(a)
+    </code></pre>
+        </div>
+        <div class="question-block">
+            <div class="title-row">
+                <div class="question-title">JS Task 2: What will this code output? [Bubbling]</div>
+                <label><input type="checkbox" class="answer"> answered</label>
+            </div>
+            <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><code class="language-javascript">
+a(); 
+b(); 
+     
+function a() { 
+     console.log('a') 
+} 
+     
+const b = () => { 
+     console.log('b')
+}
+    </code></pre>
+        </div>
+        <div class="question-block">
+            <div class="title-row">
+                <div class="question-title">JS Task 3: What will this code output? [setTimeout]</div>
+                <label><input type="checkbox" class="answer"> answered</label>
+            </div>
+            <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><code class="language-javascript">
+var arr = [10, 12, 15, 21]; 
+     
+for (var i = 0; i < arr.length; i++) { 
+    setTimeout(function() { 
+        console.log(i, arr[i]); 
+    }, 3000); 
+}
+    </code></pre>
+        </div>
+        <div class="question-block">
+            <div class="title-row">
+                <div class="question-title">JS Task 4: What will this code output? [Promose]</div>
+                <label><input type="checkbox" class="answer"> answered</label>
+            </div>
+            <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><code class="language-javascript">
 console.log("Start");
 setTimeout(() => { console.log("Timeout"); }, 0);
 Promise.resolve().then(() => { console.log("Promise"); });
 console.log("End");
     </code></pre>
-</div>
-<div class="question-block">
-    <div class="title-row">
-        <div class="question-title">Task B: Fix the memory leak in this code</div>
-        <label><input type="checkbox" class="answer"> answered</label>
-    </div>
-    <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><code class="language-javascript">
+        </div>
+        <div class="question-block">
+            <div class="title-row">
+                <div class="question-title">JS Task 5: Sort and format operations to exact format</div>
+                <label><input type="checkbox" class="answer"> answered</label>
+            </div>
+            <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><code class="language-javascript">
+const operations = [
+    { "date": "2017-07-31", "amount": "5422" },
+    { "date": "2017-06-30", "amount": "5220" },
+    { "date": "2017-05-31", "amount": "5365" },
+    { "date": "2017-08-31", "amount": "5451" },
+    { "date": "2017-09-30", "amount": "5303" },
+    { "date": "2018-03-31", "amount": "5654" },
+    { "date": "2017-10-31", "amount": "5509" },
+    { "date": "2017-12-31", "amount": "5567" },
+    { "date": "2018-01-31", "amount": "5597" },
+    { "date": "2017-11-30", "amount": "5359" },
+    { "date": "2018-02-28", "amount": "5082" },
+    { "date": "2018-04-14", "amount": "2567" }
+];
+
+function sortOperations(operationsArr) {
+
+  return result;
+}
+
+
+/* result = {
+    "2017": [
+      "07-31",
+      "08-22"
+    ],
+    "2018": [
+      "01-01"
+      "02-22"
+    ]
+  }
+*/
+    </code></pre>
+        </div>
+
+        <h2>Block 2: Node JS questions</h2>
+        <div class="question-block">
+            <div class="title-row">
+                <div class="question-title">1. Explain the Node.js Event Loop</div>
+                <label><input type="checkbox" class="answer"> answered</label>
+            </div>
+        </div>
+        <div class="question-block">
+            <div class="title-row">
+                <div class="question-title">2. What is the difference between setImmediate() and process.nextTick()?
+                </div>
+                <label><input type="checkbox" class="answer"> answered</label>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="title-row">
+                <div>
+                    <div class="question-title">3. Parsing and Validation
+                    </div>
+                    <div class="question-description">
+                        Write a function, <b>parseURLInfo(url)</b>, that takes a URL string and returns an object
+                        containing
+                        the following three properties using the built-in <b>url</b> module:
+                        <ul>
+                            <li>hostname</li>
+                            <li>pathname</li>
+                            <li>A boolean <b>hasQuery</b> indicating if there are any query parameters.</li>
+                        </ul>
+                    </div>
+                </div>
+                <label><input type="checkbox" class="answer"> answered</label>
+            </div>
+        </div>
+        <div class="question-block">
+            <div class="title-row">
+                <div>
+                    <div class="question-title">4. Basic Promise Chain
+
+                    </div>
+                    <div class="question-description">
+                        Write a function, <b>delayedSquare(n)</b>, that returns a Promise which resolves after
+                        <b>100ms</b> with the value of n^2. Chain two calls to this function:
+
+                        <ul>
+                            <li>Start with n=2</li>
+                            <li>Pass the result of the first Promise to a second call of <b>delayedSquare</b>.</li>
+                            <li>Log the final result (should be 16)</li>
+                        </ul>
+                    </div>
+                </div>
+                <label><input type="checkbox" class="answer"> answered</label>
+            </div>
+        </div>
+        <div class="question-block">
+            <div class="title-row">
+                <div class="question-title">Node Task 1: Fix the memory leak in this code</div>
+                <label><input type="checkbox" class="answer"> answered</label>
+            </div>
+            <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><code class="language-javascript">
 let cache = {};
 function loadUser(id) {
     if (!cache[id]) {
@@ -61,25 +277,95 @@ function loadUser(id) {
 }
 setInterval(() => loadUser("john"), 1000);
     </code></pre>
-</div>
-<button class="final-btn" onclick="generateReport()">Generate Interview Summary</button>
-<script>
-function copyCode(btn) {
-    const code = btn.parentElement.innerText.replace("Copy", "");
-    navigator.clipboard.writeText(code);
-    btn.innerText = "Copied!";
-    setTimeout(() => btn.innerText = "Copy", 1500);
-}
-function generateReport() {
-    const answers = document.querySelectorAll(".question-block");
-    let report = "Interview Summary:\n\n";
-    answers.forEach((block, i) => {
-        const title = block.querySelector(".question-title").innerText.trim();
-        const checked = block.querySelector(".answer").checked;
-        report += `${title} — ${checked ? "ANSWERED" : "NOT ANSWERED"}\n`;
-    });
-    prompt("Copy the interview summary:", report);
-}
-</script>
+        </div>
+        <div class="question-block">
+            <div class="title-row">
+                <div class="question-title">Node Task 2: FS + Event loop</div>
+                <label><input type="checkbox" class="answer"> answered</label>
+            </div>
+            <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><code class="language-javascript">
+const fs = require('fs');
+
+console.log('A');
+
+setTimeout(() => console.log('B'), 0);
+
+setImmediate(() => console.log('C'));
+
+process.nextTick(() => console.log('D'));
+
+fs.readFile('nonexistent.txt', (err, data) => {
+    if (err) console.log('E');
+});
+
+console.log('F');
+    </code></pre>
+        </div>
+        <h2>Block 3: React JS questions</h2>
+        <div class="question-block">
+            <div class="title-row">
+                <div class="question-title">React 1. Can you explain to me what is virtual dom and what is different
+                    between virtual dom and shadow dom?
+                </div>
+                <label><input type="checkbox" class="answer"> answered</label>
+            </div>
+        </div>
+        <div class="question-block">
+            <div class="title-row">
+                <div class="question-title">React 2. Define "prop drilling." How does React's Context API solve this
+                    problem, and what are the potential performance drawbacks of using Context heavily throughout a
+                    large application?
+                </div>
+                <label><input type="checkbox" class="answer"> answered</label>
+            </div>
+        </div>
+        <div class="question-block">
+            <div class="title-row">
+                <div class="question-title">React 3. When rendering a list of elements in React (e.g., using
+                    <b>map()</b>), why is it critical to provide a unique <b>key</b> prop? What happens if you use
+                    the array index as the <b>key</b>, and when is that practice dangerous?
+                </div>
+                <label><input type="checkbox" class="answer"> answered</label>
+            </div>
+        </div>
+        <div class="question-block">
+            <div class="title-row">
+                <div class="question-title">React 4. Explain the difference between a Controlled Component and an
+                    Uncontrolled
+                </div>
+                <label><input type="checkbox" class="answer"> answered</label>
+            </div>
+        </div>
+        <div class="question-block">
+            <div class="title-row">
+                <div class="question-title">React Task 1. Create a scenario where you would implement a Custom Hook.
+                    Write a basic custom hook named <b>useLocalStorage</b> that handles the logic for reading,
+                    setting, and deleting a value in the browser's <b>localStorage</b>.
+                </div>
+                <label><input type="checkbox" class="answer"> answered</label>
+            </div>
+        </div>
+ 
+        <button class="final-btn" onclick="generateReport()">Generate Interview Summary</button>
+    </div>
+    <script>
+        function copyCode(btn) {
+            const code = btn.parentElement.innerText.replace("Copy", "");
+            navigator.clipboard.writeText(code);
+            btn.innerText = "Copied!";
+            setTimeout(() => btn.innerText = "Copy", 1500);
+        }
+        function generateReport() {
+            const answers = document.querySelectorAll(".question-block");
+            let report = "Interview Summary:\n\n";
+            answers.forEach((block, i) => {
+                const title = block.querySelector(".question-title").innerText.trim();
+                const checked = block.querySelector(".answer").checked;
+                report += `${title} — ${checked ? "ANSWERED" : "NOT ANSWERED"}\n`;
+            });
+            prompt("Copy the interview summary:", report);
+        }
+    </script>
 </body>
+
 </html>
