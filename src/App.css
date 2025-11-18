@@ -1,0 +1,53 @@
+/* Animated gradient background with subtle moving blobs */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+:root {
+    --holo-bg: #202125;
+    --holo-panel: #2a2d32;
+    --holo-accent: #3b78e7;
+    --holo-ink: #e6eef8;
+    --holo-muted: #9aa0a6;
+}
+
+
+#root {
+    height: 100%;
+    font-family: 'Roboto', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    color: var(--holo-ink);
+    background: var(--holo-bg);
+    background: transparent;
+}
+
+
+/* Inputs: flatter underlines */
+.mantine-TextInput-root,
+.mantine-Textarea-root {
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 2px;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.question-block {
+    margin-bottom: 12px;
+}
+
+/* top bar inside the panel */
+.app-topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+/* small utility */
+.holo-toolbar {
+    background: linear-gradient(90deg, rgba(59, 120, 231, 0.06), rgba(59, 120, 231, 0.03));
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    padding: 8px 12px;
+}
+
+.holo-title {
+    font-weight: 500;
+    color: var(--holo-ink);
+}

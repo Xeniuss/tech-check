@@ -1,0 +1,238 @@
+[
+    {
+        "title": "JS Task 1: What will this code output? [Scope]",
+        "desc": "",
+        "codeblock": {
+            "language": "tsx",
+            "code": [
+                "let a = 10;",
+                "if(true) {",
+                "  let a = 9;",
+                "  console.log(a)",
+                "}",
+                "",
+                "console.log(a)"
+            ]
+        }
+    },
+    {
+        "title": "JS Task 2: What will this code output? [Bubbling]",
+        "desc": "",
+        "codeblock": {
+            "language": "tsx",
+            "code": [
+                "a(); ",
+                "b(); ",
+                "     ",
+                "function a() { ",
+                "     console.log('a') ",
+                "} ",
+                "     ",
+                "const b = () => { ",
+                "     console.log('b')",
+                "}"
+            ]
+        }
+    },
+    {
+        "title": "JS Task 3: What will this code output? [setTimeout]",
+        "desc": "",
+        "codeblock": {
+            "language": "tsx",
+            "code": [
+                "var arr = [10, 12, 15, 21]; ",
+                "     ",
+                "for (var i = 0; i < arr.length; i++) { ",
+                "    setTimeout(function() { ",
+                "        console.log(i, arr[i]); ",
+                "    }, 3000); ",
+                "}"
+            ]
+        }
+    },
+    {
+        "title": "JS Task 4: What will this code output? [Promose]",
+        "desc": "",
+        "codeblock": {
+            "language": "tsx",
+            "code": [
+                "console.log(\"Start\");",
+                "setTimeout(() => { console.log(\"Timeout\"); }, 0);",
+                "Promise.resolve().then(() => { console.log(\"Promise\"); });",
+                "console.log(\"End\");"
+            ]
+        }
+    },
+    {
+        "title": "JS Task 5: Sort and format operations to exact format",
+        "desc": "",
+        "codeblock": {
+            "language": "tsx",
+            "code": [
+                "const operations = [",
+                "    { \"date\": \"2017-07-31\", \"amount\": \"5422\" },",
+                "    { \"date\": \"2017-06-30\", \"amount\": \"5220\" },",
+                "    { \"date\": \"2017-05-31\", \"amount\": \"5365\" },",
+                "    { \"date\": \"2017-08-31\", \"amount\": \"5451\" },",
+                "    { \"date\": \"2017-09-30\", \"amount\": \"5303\" },",
+                "    { \"date\": \"2018-03-31\", \"amount\": \"5654\" },",
+                "    { \"date\": \"2017-10-31\", \"amount\": \"5509\" },",
+                "    { \"date\": \"2017-12-31\", \"amount\": \"5567\" },",
+                "    { \"date\": \"2018-01-31\", \"amount\": \"5597\" },",
+                "    { \"date\": \"2017-11-30\", \"amount\": \"5359\" },",
+                "    { \"date\": \"2018-02-28\", \"amount\": \"5082\" },",
+                "    { \"date\": \"2018-04-14\", \"amount\": \"2567\" }",
+                "];",
+                "",
+                "function sortOperations(operationsArr) {",
+                "",
+                "  return result;",
+                "}",
+                "",
+                "",
+                "/* result = {",
+                "    \"2017\": [",
+                "      \"07-31\",",
+                "      \"08-22\"",
+                "    ],",
+                "    \"2018\": [",
+                "      \"01-01\"",
+                "      \"02-22\"",
+                "    ]",
+                "  }",
+                "*/"
+            ]
+        }
+    },
+    {
+        "title": "Node 1. Explain the Node.js Event Loop",
+        "desc": "",
+        "codeblock": {
+            "language": "tsx",
+            "code": [
+                ""
+            ]
+        }
+    },
+    {
+        "title": "Node 2. What is the difference between setImmediate() and process.nextTick()?",
+        "desc": "",
+        "codeblock": {
+            "language": "tsx",
+            "code": [
+                ""
+            ]
+        }
+    },
+    {
+        "title": "Node 3. Parsing and Validation",
+        "desc": "Write a function, **parseURLInfo(url)**, that takes a URL string and returns an object\n                        containing\n                        the following three properties using the built-in **url** module:\n                        * hostname\n                        * pathname\n                        * A boolean **hasQuery** indicating if there are any query parameters.",
+        "codeblock": {
+            "language": "tsx",
+            "code": [
+                ""
+            ]
+        }
+    },
+    {
+        "title": "Node 4. Basic Promise Chain",
+        "desc": "Write a function, **delayedSquare(n)**, that returns a Promise which resolves after\n                        **100ms** with the value of n^2. Chain two calls to this function:\n* Start with n=2\n* Pass the result of the first Promise to a second call of **delayedSquare**.\n* Log the final result (should be 16)",
+        "codeblock": {
+            "language": "tsx",
+            "code": [
+                ""
+            ]
+        }
+    },
+    {
+        "title": "Node Task 1: Fix the memory leak in this code",
+        "desc": "",
+        "codeblock": {
+            "language": "tsx",
+            "code": [
+                "let cache = {};",
+                "function loadUser(id) {",
+                "    if (!cache[id]) {",
+                "        cache[id] = new Array(1000000).join(\"memory leak\");",
+                "    }",
+                "    return cache[id];",
+                "}",
+                "setInterval(() => loadUser(\"john\"), 1000);"
+            ]
+        }
+    },
+    {
+        "title": "Node Task 2: FS + Event loop",
+        "desc": "",
+        "codeblock": {
+            "language": "tsx",
+            "code": [
+                "const fs = require('fs');",
+                "",
+                "console.log('A');",
+                "",
+                "setTimeout(() => console.log('B'), 0);",
+                "",
+                "setImmediate(() => console.log('C'));",
+                "",
+                "process.nextTick(() => console.log('D'));",
+                "",
+                "fs.readFile('nonexistent.txt', (err, data) => {",
+                "    if (err) console.log('E');",
+                "});",
+                "",
+                "console.log('F');"
+            ]
+        }
+    },
+    {
+        "title": "React 1. Can you explain to me what is virtual dom and what is different between virtual dom and shadow dom?",
+        "desc": "",
+        "codeblock": {
+            "language": "tsx",
+            "code": [
+                ""
+            ]
+        }
+    },
+    {
+        "title": "React 2. Define \"prop drilling.\" ",
+        "desc": "How does React's Context API solve this  problem, and what are the potential performance drawbacks of using Context heavily throughout a large application?",
+        "codeblock": {
+            "language": "tsx",
+            "code": [
+                ""
+            ]
+        }
+    },
+    {
+        "title": "React 3. React list rendering and the key prop",
+        "desc": "When rendering a list of elements in React (e.g., using  **map()**), why is it critical to provide a unique **key** prop? What happens if you use  the array index as the **key**, and when is that practice dangerous?",
+        "codeblock": {
+            "language": "tsx",
+            "code": [
+                ""
+            ]
+        }
+    },
+    {
+        "title": "React 4. Explain the difference between a Controlled Component and an Uncontrolled",
+        "desc": "",
+        "codeblock": {
+            "language": "tsx",
+            "code": [
+                ""
+            ]
+        }
+    },
+    {
+        "title": "React Task 1. Create a scenario where you would implement a Custom Hook.",
+        "desc": "Write a basic custom hook named **useLocalStorage** that handles the logic for reading,  setting, and deleting a value in the browser's **localStorage**",
+        "codeblock": {
+            "language": "tsx",
+            "code": [
+                ""
+            ]
+        }
+    }
+]
