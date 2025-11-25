@@ -2,10 +2,10 @@
 import '@mantine/core/styles.css';
 import '@mantine/code-highlight/styles.css';
 import './App.css'
-import { Button, Container, createTheme, MantineProvider, TextInput, Modal, Textarea, Text, Rating, SimpleGrid, AppShell, Collapse, Grid } from '@mantine/core';
+import { Button, createTheme, MantineProvider, TextInput, Modal, Textarea, Text, Rating, AppShell, Grid } from '@mantine/core';
 import { Question } from './components/question/Question';
 import JsonBuilder from './components/JsonBuilder';
-import Logo from './assets/logo.svg?react';
+import Logo from './assets/logo.svg';
 import { useState, useEffect } from 'react';
 import { CodeHighlightAdapterProvider, createShikiAdapter } from '@mantine/code-highlight';
 import { IconClipboardCheck } from '@tabler/icons-react';
@@ -129,7 +129,7 @@ function App() {
         >
           <AppShell.Header>
             <div style={{ display: "flex", alignItems: 'center', justifyContent: "space-between", gap: 16 }}>
-              <Logo height={60} />
+              <div style={{ height: 50 }}><Logo /></div>
               <div style={{ maxWidth: 600 }}>
                 <div style={{ display: 'flex', gap: 8 }}>
                   <TextInput placeholder="https://example.com/content.json or /questions.json" value={url} onChange={(e) => setUrl(e.currentTarget.value)} style={{ flex: 1 }} />

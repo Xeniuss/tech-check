@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Button, Textarea, TextInput, Group, Stack, Title, Card } from '@mantine/core';
 
 type BuilderItem = {
