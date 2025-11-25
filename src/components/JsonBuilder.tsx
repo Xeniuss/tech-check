@@ -73,7 +73,7 @@ export const JsonBuilder = () => {
             <Group style={{ justifyContent: "space-between" }}>
                 <div style={{ display: "flex", gap: 8 }}>
                     <Button variant="light" leftSection="+" onClick={addItem}>Add Item</Button>
-                    <Button onClick={buildJson} color="green">Build JSON</Button>
+                    <Button onClick={buildJson}>Build JSON</Button>
                 </div>
                 <div style={{ display: "flex", gap: 8 }}>
                     <Button variant="outline" onClick={copyToClipboard}>Copy JSON</Button>

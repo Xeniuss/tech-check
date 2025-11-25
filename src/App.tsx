@@ -2,12 +2,13 @@
 import '@mantine/core/styles.css';
 import '@mantine/code-highlight/styles.css';
 import './App.css'
-import { Button, Container, createTheme, MantineProvider, TextInput, Modal, Textarea, Text, Rating } from '@mantine/core';
+import { Button, Container, createTheme, MantineProvider, TextInput, Modal, Textarea, Text, Rating, SimpleGrid, AppShell, Collapse, Grid } from '@mantine/core';
 import { Question } from './components/question/Question';
 import JsonBuilder from './components/JsonBuilder';
 import Logo from './assets/logo.svg?react';
 import { useState, useEffect } from 'react';
 import { CodeHighlightAdapterProvider, createShikiAdapter } from '@mantine/code-highlight';
+import { IconClipboardCheck } from '@tabler/icons-react';
 
 type ParsedItem = {
   title: string;
@@ -31,7 +32,7 @@ const shikiAdapter = createShikiAdapter(loadShiki);
 
 const theme = createTheme({
   fontFamily: 'Open Sans, sans-serif',
-  primaryColor: 'violet',
+  primaryColor: "violet",
 });
 function App() {
   const [url, setUrl] = useState(localStorage.getItem('contentUrl') || '');
@@ -117,102 +118,124 @@ function App() {
   return (
     <MantineProvider theme={theme} defaultColorScheme="dark">
       <CodeHighlightAdapterProvider adapter={shikiAdapter}>
-        <div className="app-bg">
+        <AppShell
+          padding="sm"
+          header={{ height: 60 }}
+          navbar={{
+            width: 260,
+            breakpoint: 'sm',
 
-          <div className="app-content">
-            <Container strategy="grid" size={800}>
-              <div className="app-topbar" style={{ marginTop: '12px', marginBottom: '12px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                  <Logo />
-
-                </div>
+          }}
+        >
+          <AppShell.Header>
+            <div style={{ display: "flex", alignItems: 'center', justifyContent: "space-between", gap: 16 }}>
+              <Logo height={60} />
+              <div style={{ maxWidth: 600 }}>
                 <div style={{ display: 'flex', gap: 8 }}>
-                  <Button variant={route === 'questions' ? 'filled' : 'light'} onClick={() => setRoute('questions')}>Questions</Button>
-                  <Button variant={route === 'builder' ? 'filled' : 'light'} onClick={() => setRoute('builder')}>Builder</Button>
+                  <TextInput placeholder="https://example.com/content.json or /questions.json" value={url} onChange={(e) => setUrl(e.currentTarget.value)} style={{ flex: 1 }} />
+                  <Button onClick={loadContent} variant='light' loading={loading}>Load</Button>
                 </div>
+                {error && <div style={{ color: 'salmon' }}>{error}</div>}
               </div>
+            </div>
+          </AppShell.Header>
 
-              {route === 'questions' ? (
-                <>
-                  <div style={{ marginBottom: '12px' }}>
-                    <div style={{ display: 'flex', gap: 8 }}>
-                      <TextInput placeholder="https://example.com/content.json or /questions.json" value={url} onChange={(e) => setUrl(e.currentTarget.value)} style={{ flex: 1 }} />
-                      <Button onClick={loadContent} loading={loading}>Load</Button>
-                    </div>
-                    {error && <div style={{ color: 'salmon' }}>{error}</div>}
-                  </div>
+          <AppShell.Navbar>
 
-                  {
-                    data ? (
-                      data.items ? (
-                        data.items.map((item: ParsedItem, idx: number) => (
-                          <Question key={idx}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8, padding: 12 }} className='navigation'>
+              <Button variant={route === 'questions' ? 'light' : 'transparent'} onClick={() => setRoute('questions')}>Questions</Button>
+              <Button variant={route === 'builder' ? 'light' : 'transparent'} onClick={() => setRoute('builder')}>Builder</Button>
+            </div>
+            <div style={{ marginTop: 'auto', padding: 12 }}>
+              <div style={{ fontSize: 12, color: 'var(--holo-muted)' }}>Total</div>
+              <div style={{ fontWeight: 600 }}>{totalScore} / {maxScore}</div>
+              <div style={{ fontSize: 12, color: 'var(--holo-muted)' }}>({maxScore ? Math.round((totalScore / maxScore) * 100) : 0}%)</div>
+            </div>
+
+            <div style={{ padding: 12 }}>
+              <Button fullWidth onClick={() => setSummaryOpen(true)} leftSection={<IconClipboardCheck />}>Summary</Button>
+            </div>
+
+          </AppShell.Navbar>
+
+          <AppShell.Main>
+            {route === 'questions' ? (
+              <Grid justify="flex-start" align="flex-start" maw={800}>
+                {
+                  data ? (
+                    data.items ? (
+                      data.items.map((item: ParsedItem, idx: number) => (
+                        <Grid.Col span={12} key={idx}>
+                          <Question
                             title={item.title}
                             content={item.desc}
                             codeBlock={item.codeblock as any}
                             rating={ratings[idx] ?? 0}
                             onRate={(v) => setRatings((r) => { const copy = [...r]; copy[idx] = v; return copy; })}
                           />
-                        ))
-                      ) : (
-                        <Question title="Sample Question" content="This is a sample question content." rating={ratings[0] ?? 0} onRate={(v) => setRatings([v])} />
-                      )
-                    ) : (
-                      <Question title="Sample Question" content="This is a sample question content." rating={ratings[0] ?? 0} onRate={(v) => setRatings([v])} />
-                    )
-                  }
-
-                  <div style={{ marginTop: 12 }}>
-                    <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                      <Button onClick={() => setSummaryOpen(true)}>Summary</Button>
-                    </div>
-                  </div>
-                </>
-              ) : (
-                <JsonBuilder />
-              )}
-
-              <Modal opened={summaryOpen} onClose={() => setSummaryOpen(false)} title="Questions Summary" size="lg">
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', gap: 8, alignItems: 'center' }}>
-                    <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-                      <div style={{ fontSize: 12, color: 'var(--holo-muted)' }}>Total</div>
-                      <div style={{ fontWeight: 600 }}>{totalScore} / {maxScore}</div>
-                      <div style={{ fontSize: 12, color: 'var(--holo-muted)' }}>({maxScore ? Math.round((totalScore / maxScore) * 100) : 0}%)</div>
-                    </div>
-                    <div>
-                      <Button onClick={async () => { await navigator.clipboard.writeText(summaryText || ''); }} disabled={!summaryText}>Copy Summary</Button>
-                    </div>
-                  </div>
-
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                    {data && data.items && data.items.length ? (
-                      data.items.map((it: ParsedItem, i: number) => (
-                        <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '6px 0', borderBottom: '1px solid rgba(255,255,255,0.03)' }}>
-                          <div style={{ flex: 1 }}>
-                            <Text size="sm">{it.title}</Text>
-                          </div>
-                          <div style={{ marginLeft: 12, display: 'flex', alignItems: 'center', gap: 8 }}>
-                            <Rating value={ratings[i] ?? 0} readOnly />
-                            <Text size="xs" color={(ratings[i] ?? 0) === 0 ? 'red' : 'dimmed'}>{ratings[i] ?? 0}</Text>
-                          </div>
-                        </div>
+                        </Grid.Col>
                       ))
                     ) : (
-                      <Text>No questions loaded yet.</Text>
-                    )}
-                  </div>
+                      <Grid.Col span={12} >
+                        <Question title="Sample Question" content="This is a sample question content." rating={ratings[0] ?? 0} onRate={(v) => setRatings([v])} />
+                      </Grid.Col>
+                    )
+                  ) : (
+                    <Grid.Col span={12} >
+                      <Question title="Sample Question" content="This is a sample question content." rating={ratings[0] ?? 0} onRate={(v) => setRatings([v])} />
+                    </Grid.Col>
+                  )
+                }
+              </Grid>
+            ) : (
+              <Grid justify="flex-start" align="flex-start" maw={800} gutter={16}>
+                <JsonBuilder />
+              </Grid>
+            )}
 
-                  <div style={{ marginTop: 8 }}>
-                    <Text size="sm" style={{ fontWeight: 500 }}>Copy-ready text</Text>
-                    <Textarea readOnly value={summaryText} minRows={6} autosize style={{ marginTop: 6 }} />
+            <Modal opened={summaryOpen} onClose={() => setSummaryOpen(false)} title="Questions Summary" size="lg">
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', gap: 8, alignItems: 'center' }}>
+                  <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+                    <div style={{ fontSize: 12, color: 'var(--holo-muted)' }}>Total</div>
+                    <div style={{ fontWeight: 600 }}>{totalScore} / {maxScore}</div>
+                    <div style={{ fontSize: 12, color: 'var(--holo-muted)' }}>({maxScore ? Math.round((totalScore / maxScore) * 100) : 0}%)</div>
+                  </div>
+                  <div>
+                    <Button onClick={async () => { await navigator.clipboard.writeText(summaryText || ''); }} disabled={!summaryText}>Copy Summary</Button>
                   </div>
                 </div>
-              </Modal>
 
-            </Container>
-          </div>
-        </div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                  {data && data.items && data.items.length ? (
+                    data.items.map((it: ParsedItem, i: number) => (
+                      <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '6px 0', borderBottom: '1px solid rgba(255,255,255,0.03)' }}>
+                        <div style={{ flex: 1 }}>
+                          <Text size="sm">{it.title}</Text>
+                        </div>
+                        <div style={{ marginLeft: 12, display: 'flex', alignItems: 'center', gap: 8 }}>
+                          <Rating value={ratings[i] ?? 0} readOnly />
+                          <Text size="xs" color={(ratings[i] ?? 0) === 0 ? 'red' : 'dimmed'}>{ratings[i] ?? 0}</Text>
+                        </div>
+                      </div>
+                    ))
+                  ) : (
+                    <Text>No questions loaded yet.</Text>
+                  )}
+                </div>
+
+                <div style={{ marginTop: 8 }}>
+                  <Text size="sm" style={{ fontWeight: 500 }}>Copy-ready text</Text>
+                  <Textarea readOnly value={summaryText} minRows={6} autosize style={{ marginTop: 6 }} />
+                </div>
+              </div>
+            </Modal>
+
+
+
+          </AppShell.Main>
+        </AppShell>
+
       </CodeHighlightAdapterProvider>
     </MantineProvider>
   );
