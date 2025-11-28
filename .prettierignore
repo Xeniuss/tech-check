@@ -1,0 +1,12 @@
+node_modules
+dist
+build
+.vite
+.turbo
+coverage
+.env
+.DS_Store
+.idea
+.vscode
+public
+*.svg
